@@ -149,7 +149,7 @@ def pregunta_09():
     39   39   E    5  1998-01-26  1998
 
     """  
-    tbl0['year'] = to_datetime(tbl0['_c3']).year
+    tbl0['year'] = tbl0['_c3'].apply(lambda x: x.split('-')[0])
     return tbl0
 
 
@@ -167,7 +167,10 @@ def pregunta_10():
     3   D                  1:2:3:5:5:7
     4   E  1:1:2:3:3:4:5:5:5:6:7:8:8:9
     """
-    return
+    
+    tabla = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(sorted(map(str, x)))).reset_index()
+    tabla.columns = ["_c0", "_c1"]
+    return tabla
 
 
 def pregunta_11():
@@ -186,7 +189,8 @@ def pregunta_11():
     38   38      d,e
     39   39    a,d,f
     """
-    return
+    tabla = tbl1.groupby("_c0")["_c4"].apply(lambda x: ','.join(sorted(map(str, x)))).reset_index()
+    return tabla
 
 
 def pregunta_12():
@@ -204,7 +208,8 @@ def pregunta_12():
     38   38                    eee:0,fff:9,iii:2
     39   39                    ggg:3,hhh:8,jjj:5
     """
-    return
+    tabla = tabla = tbl2.groupby("_c0").apply(lambda x: ','.join(sorted(x["_c5a"] + ':' + x["_c5b"].astype(str)))).reset_index()
+    return tabla
 
 
 def pregunta_13():
@@ -221,4 +226,6 @@ def pregunta_13():
     E    275
     Name: _c5b, dtype: int64
     """
-    return
+    merged = pd.merge(tbl0, tbl2, on="_c0")
+    tabla = merged.groupby("_c1")["_c5b"].sum().reset_index()
+    return tabla
