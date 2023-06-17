@@ -232,4 +232,3 @@ def pregunta_13():
     tabla = merged.groupby("_c1").sum()["_c5b"]
     return tabla
 
-pregunta_10()
