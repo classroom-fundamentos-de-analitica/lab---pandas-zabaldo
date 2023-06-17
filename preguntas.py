@@ -169,8 +169,8 @@ def pregunta_10():
     """
     
     tabla = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(sorted(map(str, x)))).reset_index()
-    tabla.columns=["_c0", "_c1"]
-    return tabla.set_index("_c0")
+    return tabla.set_index("_c1")
+    
 
 
 def pregunta_11():
