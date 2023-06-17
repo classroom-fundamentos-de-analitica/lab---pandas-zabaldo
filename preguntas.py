@@ -169,11 +169,7 @@ def pregunta_10():
     """
     
     tabla = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(sorted(map(str, x)))).reset_index()
-    
-
-    # Ordenar los valores por la columna _c1
-    result = pd.DataFrame(tabla, index=pd.Series(tabla, name="_c1"))
-    
+    tabla.columns=["_c0", "_c1"]
     return tabla
 
 
@@ -236,3 +232,4 @@ def pregunta_13():
     tabla = merged.groupby("_c1").sum()["_c5b"]
     return tabla
 
+pregunta_10()
