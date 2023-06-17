@@ -221,5 +221,3 @@ def pregunta_13():
     Name: _c5b, dtype: int64
     """
     return
-
-pregunta_07()
