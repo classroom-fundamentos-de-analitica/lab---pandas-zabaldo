@@ -214,8 +214,7 @@ def pregunta_12():
     39   39                    ggg:3,hhh:8,jjj:5
     """
     tabla = tabla = tbl2.groupby("_c0").apply(lambda x: ','.join(sorted(x["_c5a"] + ':' + x["_c5b"].astype(str)))).reset_index()
-    
-    tabla.rename(columns={"_c0": "_c5"})
+    tabla.columns=["_c0", "_c5"]
     return tabla
 
 
