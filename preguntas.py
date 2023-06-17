@@ -169,7 +169,8 @@ def pregunta_10():
     """
     
     tabla = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(sorted(map(str, x)))).reset_index()
-    tabla.columns = ["_c0", "_c1"]
+    
+    
     return tabla
 
 
@@ -209,6 +210,8 @@ def pregunta_12():
     39   39                    ggg:3,hhh:8,jjj:5
     """
     tabla = tabla = tbl2.groupby("_c0").apply(lambda x: ','.join(sorted(x["_c5a"] + ':' + x["_c5b"].astype(str)))).reset_index()
+    
+    tabla.rename(columns={"_c0": "_c5"})
     return tabla
 
 
@@ -228,4 +231,7 @@ def pregunta_13():
     """
     merged = pd.merge(tbl0, tbl2, on="_c0")
     tabla = merged.groupby("_c1")["_c5b"].sum().reset_index()
+    
+    
     return tabla
+
