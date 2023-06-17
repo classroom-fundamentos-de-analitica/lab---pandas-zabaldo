@@ -170,6 +170,9 @@ def pregunta_10():
     
     tabla = tbl0.groupby("_c1")["_c2"].apply(lambda x: ":".join(sorted(map(str, x)))).reset_index()
     
+
+    # Ordenar los valores por la columna _c1
+    result = pd.DataFrame(tabla, index=pd.Series(tabla, name="_c1"))
     
     return tabla
 
@@ -191,6 +194,7 @@ def pregunta_11():
     39   39    a,d,f
     """
     tabla = tbl1.groupby("_c0")["_c4"].apply(lambda x: ','.join(sorted(map(str, x)))).reset_index()
+    
     return tabla
 
 
@@ -230,8 +234,6 @@ def pregunta_13():
     Name: _c5b, dtype: int64
     """
     merged = pd.merge(tbl0, tbl2, on="_c0")
-    tabla = merged.groupby("_c1")["_c5b"].sum().reset_index()
-    
-    
+    tabla = merged.groupby("_c1").sum()["_c5b"]
     return tabla
 
